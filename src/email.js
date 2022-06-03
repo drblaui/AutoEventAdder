@@ -75,7 +75,7 @@ function buildAttMessageFunction(attachment) {
 				imap.end();
 			}
 		});
-		imap.openBox('Wohnung', true, (err, box) => {
+		imap.openBox('Wohnung', false, (err, box) => {
 			if (err) throw err;
 			imap.search(['UNSEEN'], (err, res) => {
 				if (err) throw err;

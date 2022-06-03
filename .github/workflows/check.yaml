@@ -1,0 +1,29 @@
+name: Insert event
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Code
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run download && node .
+    env:
+      GOOGLE_PRIVATE_KEY: ${{secrets.GOOGLE_PRIVATE_KEY}}
+      GOOGLE_CLIENT_EMAIL: ${{secrets.GOOGLE_CLIENT_EMAIL}}
+      GOOGLE_PROJECT_NUMBER: ${{secrets.GOOGLE_PROJECT_NUMBER}}
+      GOOGLE_CALENDAR_ID: ${{secrets.GOOGLE_CALENDAR_ID}}
+      MAIL_SERVICE_PASS: ${{secrets.MAIL_SERVICE_PASS}}
+      MAIL_SERVICE_USER: ${{secrets.MAIL_SERVICE_USER}}
+      MAIL_SERVICE_HOST: ${{secrets.MAIL_SERVICE_HOST}}
+      MAIL_SERVICE_PORT: ${{secrets.MAIL_SERVICE_PORT}}
+      MAIL_SERVICE_SECURE: ${{secrets.MAIL_SERVICE_SECURE}}

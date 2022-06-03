@@ -96,6 +96,12 @@ function buildAttMessageFunction(attachment) {
 								struct: true
 							});
 							f.on('message', buildAttMessageFunction(attachment))
+							imap.addFlags(attrs.uid, ['\\Seen'], (err) =>{
+								if (err) {
+									console.log("Err while marking as seen");
+									throw err;
+								}
+							});
 						}
 					})
 				})

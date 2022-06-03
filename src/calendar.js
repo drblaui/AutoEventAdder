@@ -43,7 +43,7 @@ function insert(event) {
 				console.log('There was an error contacting the Calendar service: ' + err);
 				return;
 			}
-			console.log('Event created: %s', evt.data);
+			console.log('Event created');
 		});
 	});
 }
